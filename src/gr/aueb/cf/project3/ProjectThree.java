@@ -13,6 +13,16 @@ public class ProjectThree {
 
     }
 
+    /**
+     * Reads a text file and counts the frequency of each letter character.
+     * Converts all letters to lowercase,ignores whitespaces and non-letter characters.
+     * Stores in a 2d array where first dimension is the letter written as int
+     * and second dimension is the number count of letter
+     *
+     * @param fileName      Path to input text file to analyze
+     * @return              Return a 2D array of characters - count
+     */
+
     public static int[][] readFile(String fileName) {
         int[][] characters = new int[128][2];
         int count = 0;
@@ -47,6 +57,11 @@ public class ProjectThree {
         return Arrays.copyOfRange(characters, 0, count);
     }
 
+    /**
+     * Prints the characters count results sorted by frequency in descending order
+     *
+     * @param arr       The 2d array which containts the letters-number counts
+     */
     public static void printResults(int[][] arr) {
         //Arrays.sort(arr, (a, b)-> Character.compare((char) a[0], (char) b[0]));
 

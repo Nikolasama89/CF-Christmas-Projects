@@ -1,7 +1,6 @@
 package gr.aueb.cf.project1;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
@@ -16,6 +15,14 @@ public class ProjectOne {
 
     }
 
+    /**
+     * Reads from a file until found -1 or reaching maximum limit (49)
+     * Numbers returned sorted.
+     *
+     * @param file  Path to the file with the numbers.
+     * @return      Returns the numbers sorted to ascending order
+     *              Returns empty array in case of error
+     */
     public static int[] readFileNumbers(String file) {
         try {
             Scanner scanner = new Scanner(new File(file));
@@ -24,7 +31,7 @@ public class ProjectOne {
 
             int[] inputNumbers = new int[49];
 
-            while ((num = scanner.nextInt()) != -1 && count <= 48) {
+            while ((num = scanner.nextInt()) != -1 && count < 49) {
                 inputNumbers[count++] = num;
             }
             int[] numbers = Arrays.copyOf(inputNumbers, count);
@@ -39,6 +46,13 @@ public class ProjectOne {
         return new int[0];
     }
 
+    /**
+     *  Checks if the array has more than the maximum allowed even numbers.
+     *
+     * @param arr           The array of numbers to check.
+     * @param maxEvens      The maximum allowed even numbers
+     * @return              True if the Array has more than the allowed numbers, false otherwise.
+     */
     public static boolean isEven(int[] arr, int maxEvens) {
         int evensCount = 0;
 
@@ -48,6 +62,13 @@ public class ProjectOne {
         return evensCount > maxEvens;
     }
 
+    /**
+     *  Checks if the array has more than the maximum allowed odd numbers.
+     *
+     * @param arr           The array of numbers to check.
+     * @param maxEvens      The maximum allowed odd numbers
+     * @return              True if the Array has more than the allowed numbers, false otherwise.
+     */
     public static boolean isOdd(int[] arr, int maxOdds) {
         int oddsCount = 0;
 
@@ -57,6 +78,12 @@ public class ProjectOne {
         return oddsCount > maxOdds;
     }
 
+    /**
+     *  Checks the array if it has more than two contiguous numbers.
+     *
+     * @param arr       The array of numbers to check.
+     * @return          Returns true if it has more than two numbers.
+     */
     public static boolean isContiguous(int[] arr) {
         int consecutiveCount = 1;
 
@@ -71,6 +98,12 @@ public class ProjectOne {
         return false;
     }
 
+    /**
+     *  Checks if more than 3 numbers in the array has the same ending.
+     *
+     * @param arr       The array of numbers to check
+     * @return          Returns true if it has more than 3 numbers with same ending otherwise false
+     */
     public static boolean isSameEnding(int[] arr) {
         int[] endings = new int[10];
 
@@ -83,6 +116,13 @@ public class ProjectOne {
         return false;
     }
 
+    /**
+     *  Checks if more than 3 numbers in the array belong to the same ten group
+     *
+     * @param arr       The array of numbers to check
+     * @return          Returns true if more than three numbers otherwise false
+     */
+
     public static boolean isSameTen(int[] arr) {
         int[] ten = new int[5];
 
@@ -94,6 +134,19 @@ public class ProjectOne {
         }
         return false;
     }
+
+    /**
+     *  Generates all valid 6 numbers combinations from the input array.
+     *  Combinations must have these requirements:
+     *  - No more than 4 even numbers
+     *  - No more than 4 odd numbers
+     *  - No more than two consecutive numbers
+     *  - No more than three numbers with same last digit
+     *  - No more than three numbers from same tens group
+     *
+     * @param numbers       Array of numbers to generate combos
+     * @return              2d array each row is a valid combo
+     */
 
     public static int[][] generateSixers(int[] numbers) {
         int[][] validSixers = new int[50000][6];
@@ -119,6 +172,13 @@ public class ProjectOne {
         return Arrays.copyOf(validSixers, count);
     }
 
+    /**
+     * Writes the valid combinations to a specified output file.
+     * Every combination is written to a new line.
+     *
+     * @param validCombos   the 2d array of valid combos to write
+     * @param fileName      Path to the output file
+     */
     public static void writeToFile(int[][] validCombos, String fileName) {
         try (FileWriter writer = new FileWriter(fileName)) {
             for (int[] combo : validCombos) {
